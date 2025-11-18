@@ -1,11 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for,session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date   
+from flask import Flask, render_template, request, redirect, url_for, flash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # setting up the flask app
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///smarthealth.db'  # database setup
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'faycel_habchi123456789'  # pour les sessions
+
 db = SQLAlchemy(app)  # database link
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -50,9 +54,96 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
+    if request.method == "POST":
+        action = request.form.get("action")  # "login" ou "register"
+        error = None
+
+        # Si l'utilisateur veut se CONNECTER
+        if action == "login":
+            email = request.form.get("login_email")
+            password = request.form.get("login_password")
+
+            user = User.query.filter_by(email=email).first()
+
+            if user is None:
+                error = "No account found with this email."
+            elif not check_password_hash(user.password, password):
+                error = "Incorrect password."
+
+            if error is None:
+                # on sauvegarde l'utilisateur dans la session
+                session["user_id"] = user.id
+                session["user_role"] = user.role
+                session["user_email"] = user.email
+                
+
+                flash("Login successful! Welcome back!", "success")
+
+                # Si admin → redirige vers /admin, sinon vers /search
+                if user.role == "admin":
+                    return redirect(url_for("admin"))
+                else:
+                    next_page = request.args.get("next")
+                    if next_page:
+                        return redirect(next_page)
+                    return redirect(url_for("search"))
+            else:
+                flash(error, "danger")
+
+        # Si l'utilisateur veut s'INSCRIRE
+        elif action == "register":
+            firstname = request.form.get("firstname")
+            lastname = request.form.get("lastname")
+            email = request.form.get("email")
+            password = request.form.get("password")
+            address = request.form.get("address")
+            number = request.form.get("number")
+            role = "patient"  # par défaut
+
+            # Vérifier que tout est rempli
+            if not all([firstname, lastname, email, password, address, number]):
+                error = "Please fill in all fields."
+
+            # Vérifier si email déjà utilisé
+            existing_user = User.query.filter_by(email=email).first()
+            if existing_user:
+                error = "Email already exists! Please use another one."
+
+            if error is None:
+                hashed_pw = generate_password_hash(password)
+
+                new_user = User(
+                    firstname=firstname,
+                    lastname=lastname,
+                    email=email,
+                    password=hashed_pw,
+                    address=address,
+                    number=int(number),
+                    role=role
+                )
+                db.session.add(new_user)
+                db.session.commit()
+
+                # connexion direct après inscription
+                session["user_id"] = new_user.id
+                session["user_role"] = new_user.role
+                session["user_email"] = new_user.email
+                session["user_avatar"] = "img/default-avatar.png"
+
+                flash("Registration successful! You are now logged in.", "success")
+
+                next_page = request.args.get("next")
+                if next_page:
+                    return redirect(next_page)
+                return redirect(url_for("search"))
+            else:
+                flash(error, "danger")
+
+    # GET → on affiche juste le template login/register
     return render_template("login.html")
+
 
 @app.route("/doctor_login")
 def doctor_login():
@@ -68,6 +159,12 @@ def admin():
 
 @app.route("/search")
 def search():
+    # 1️⃣ Si pas connecté → redirige vers login
+    if "user_id" not in session:
+        # on garde en mémoire où il voulait aller (ici /search)
+        return redirect(url_for("login", next=request.path))
+
+    # 2️⃣ Si connecté → comportement normal
     query = request.args.get("query", "")
     if query:
         doctors = Doctor.query.filter(
@@ -78,6 +175,7 @@ def search():
     else:
         doctors = Doctor.query.all()
     return render_template("search.html", doctors=doctors, query=query)
+
 
 # this is the booking route (for patient)
 @app.route("/book/<int:doctor_id>", methods=["GET", "POST"])
