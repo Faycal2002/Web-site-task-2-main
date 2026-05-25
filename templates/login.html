@@ -1,101 +1,83 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
-<section class="min-vh-100 d-flex align-items-center mt-5 mb-5">
+<section class="auth-shell">
   <div class="container">
-    <div class="row g-4 justify-content-center">
+    <div class="row g-4 align-items-stretch">
+      <div class="col-lg-4">
+        <div class="auth-aside h-100">
+          <span class="section-badge mb-3 text-white">Account access</span>
+          <h1 class="section-title text-white mb-3">Sign in or create an account to manage your visits.</h1>
+          <p class="mb-4">Use one account to search doctors, book visits, and review your appointment history.</p>
+          <ul class="auth-list">
+            <li><span>Keep every appointment in one place.</span></li>
+            <li><span>Book faster on desktop and mobile.</span></li>
+            <li><span>Track consultations from your dashboard.</span></li>
+          </ul>
+        </div>
+      </div>
 
-      <!-- Login -->
-      <div class="col-12 col-md-6 col-lg-5">
-        <div class="card shadow-sm rounded-4">
-          <div class="card-body p-4">
-            <h5 class="mb-3">Login</h5>
+      <div class="col-lg-4">
+        <div class="auth-card h-100">
+          <div class="card-body">
+            <span class="section-badge mb-3">Login</span>
+            <h2 class="h4 fw-bold mb-3">Welcome back</h2>
             <form action="{{ url_for('login') }}" method="post">
-              <!-- IMPORTANT : indique que c'est une action login -->
               <input type="hidden" name="action" value="login">
-
               <div class="mb-3">
-                <label for="loginEmail" class="form-label">Enter your email :</label>
-                <input type="email" class="form-control" id="loginEmail" name="login_email" placeholder="Email"
-                  required>
+                <label for="loginEmail" class="form-label fw-semibold">Email</label>
+                <input type="email" class="form-control form-control-lg" id="loginEmail" name="login_email" placeholder="you@example.com" required>
               </div>
-
               <div class="mb-3">
-                <label for="loginPassword" class="form-label">Enter your password :</label>
-                <input type="password" class="form-control" id="loginPassword" name="login_password"
-                  placeholder="Password" required>
+                <label for="loginPassword" class="form-label fw-semibold">Password</label>
+                <input type="password" class="form-control form-control-lg" id="loginPassword" name="login_password" placeholder="Your password" required>
               </div>
-
-              <button type="submit" class="btn btn-outline-dark w-100 rounded-3 py-2">
-                Login
-              </button>
+              <button type="submit" class="btn btn-dark w-100 btn-lg rounded-pill py-3">Login</button>
             </form>
           </div>
         </div>
       </div>
 
-      <!-- Register -->
-      <div class="col-12 col-md-6 col-lg-5">
-        <div class="card shadow-sm rounded-4">
-          <div class="card-body p-4">
-            <h5 class="mb-3">Register</h5>
-
+      <div class="col-lg-4">
+        <div class="auth-card h-100">
+          <div class="card-body">
+            <span class="section-badge mb-3">Register</span>
+            <h2 class="h4 fw-bold mb-3">Create your account</h2>
             <form method="POST" action="{{ url_for('login') }}">
-
-              <!-- IMPORTANT : indique que c'est une action register -->
               <input type="hidden" name="action" value="register">
-
               <div class="mb-3">
-                <label for="firstName" class="form-label">First Name :</label>
-                <input type="text" class="form-control" id="firstName" name="firstname"
-                  placeholder="Enter your first name" required>
+                <label for="firstName" class="form-label fw-semibold">First name</label>
+                <input type="text" class="form-control" id="firstName" name="firstname" placeholder="First name" required>
               </div>
-
               <div class="mb-3">
-                <label for="lastName" class="form-label">Last Name :</label>
-                <input type="text" class="form-control" id="lastName" name="lastname" placeholder="Enter your last name"
-                  required>
+                <label for="lastName" class="form-label fw-semibold">Last name</label>
+                <input type="text" class="form-control" id="lastName" name="lastname" placeholder="Last name" required>
               </div>
-
               <div class="mb-3">
-                <label for="address" class="form-label">Address :</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address"
-                  required>
+                <label for="address" class="form-label fw-semibold">Address</label>
+                <input type="text" class="form-control" id="address" name="address" placeholder="Your address" required>
               </div>
-
               <div class="mb-3">
-                <label for="phoneNumber" class="form-label">Phone Number :</label>
-                <input type="tel" class="form-control" id="phoneNumber" name="number"
-                  placeholder="Enter your phone number" required>
+                <label for="phoneNumber" class="form-label fw-semibold">Phone number</label>
+                <input type="tel" class="form-control" id="phoneNumber" name="number" placeholder="Your phone number" required>
               </div>
-
               <div class="mb-3">
-                <label for="registerEmail" class="form-label">Email :</label>
-                <input type="email" class="form-control" id="registerEmail" name="email" placeholder="Enter your email"
-                  required>
+                <label for="registerEmail" class="form-label fw-semibold">Email</label>
+                <input type="email" class="form-control" id="registerEmail" name="email" placeholder="you@example.com" required>
               </div>
-
               <div class="mb-3">
-                <label for="registerPassword" class="form-label">Password :</label>
-                <input type="password" class="form-control" id="registerPassword" name="password"
-                  placeholder="Enter your password" required>
+                <label for="registerPassword" class="form-label fw-semibold">Password</label>
+                <input type="password" class="form-control" id="registerPassword" name="password" placeholder="Create a password" required>
               </div>
-
-              <div class="mb-3">
-                <label for="confirmPassword" class="form-label">Confirm Password :</label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password"
-                  required>
+              <div class="mb-4">
+                <label for="confirmPassword" class="form-label fw-semibold">Confirm password</label>
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
               </div>
-
-              <button type="submit" class="btn btn-dark w-100 rounded-3 py-2">
-                Register
-              </button>
-
+              <button type="submit" class="btn btn-outline-dark w-100 btn-lg rounded-pill py-3">Register</button>
             </form>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>

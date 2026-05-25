@@ -2,151 +2,171 @@
 {% block title %}Home - SmartHealth{% endblock %}
 {% block content %}
 
-<!-- premiere page-->
+<section id="home" class="hero-section anchor-section">
+  <div class="container">
+    <div class="hero-card p-4 p-lg-5">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <span class="hero-badge mb-3">Modern patient experience</span>
+          <h1 class="hero-title mb-3">Search doctors, book visits, and manage appointments in one place.</h1>
+          <p class="hero-copy fs-5 mb-4">SmartHealth helps patients discover trusted doctors by specialty or city, then book and track visits through a clean, simple interface.</p>
 
-<section id="home" class="d-flex flex-column justify-content-center align-items-center text-center position-relative" style="min-height: calc(100vh - 80px);">
-    <img src="static/img/photo 3.png" class="position-absolute bottom-25 start-50 z-0" width="250">
+          <div class="d-flex flex-wrap gap-3 mb-4">
+            <a href="{{ url_for('search') }}" class="btn btn-dark btn-lg rounded-pill px-4">Book an appointment</a>
+            <a href="{{ url_for('appointments') }}" class="btn btn-outline-dark btn-lg rounded-pill px-4">Track appointments</a>
+          </div>
 
+          <div class="hero-stats">
+            <div class="stat-card">
+              <strong>Search</strong>
+              <span class="text-muted">By specialty, name, or city</span>
+            </div>
+            <div class="stat-card">
+              <strong>Book</strong>
+              <span class="text-muted">Quick appointment scheduling</span>
+            </div>
+            <div class="stat-card">
+              <strong>Track</strong>
+              <span class="text-muted">Follow your consultations</span>
+            </div>
+          </div>
+        </div>
 
-      <div class="container text-center  z-1">
-        <h1 class="display-1">
-          Search doctors<br>
-          Book visits<br>
-          Track appointments
-        </h1>
+        <div class="col-lg-6">
+          <div class="hero-visual">
+            <div class="floating-card">
+              <div class="d-flex align-items-center justify-content-between gap-3">
+                <div>
+                  <div class="fw-bold text-dark">Available specialties</div>
+                  <div class="small text-muted">Clean search, fast booking, clear follow-up.</div>
+                </div>
+                <div class="text-end">
+                  <div class="fw-bold text-success">24/7</div>
+                  <div class="small text-muted">Always online</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="container mt-5 text-center">
-<a href="{{ url_for('search') }}" class="btn btn-dark">Book</a>
-        <a href="{{ url_for('appointments') }}" class="btn btn-white active">Track</a>
-      </div>
-
-    </section>
-
-    <section id="about" class="min-vh-100  position-relative bg-light" style="scroll-margin-top: 55px;">
-      <div  class="container mt-3 p-3">
-            <h1>About us</h1>    
-            <p>
-                SmartHealth is an innovative digital healthcare platform designed to make finding and booking medical appointments simple, 
-                fast, and accessible. Our mission is to connect patients with doctors through a modern, user-friendly experience. With just
-                a few clicks, users can search for healthcare professionals by specialty and location, explore detailed profiles with contact 
-                information, addresses, and opening hours, and easily book appointments online. SmartHealth focuses on essential, practical features
-                that deliver real value — combining simplicity, reliability, and efficiency to make quality healthcare accessible to everyone,
-                everywhere.
-            </p>
-
-
-         <!-- Carousel -->
-            <div id="demo" class="carousel slide" data-bs-ride="carousel">
-
-            <!-- Indicators/dots -->
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-            </div>
-            
-            <!-- The slideshow/carousel -->
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                <img src="static/img/photo 1.png" alt="people talking" class="d-block" style="width:100%">
-                </div>
-                <div class="carousel-item">
-                <img src="static/img/photo 2.png" alt="tablette" class="d-block" style="width:100%">
-                </div>
-                <div class="carousel-item">
-                <img src="static/img/photo group.jpg" alt="photo group" class="d-block" style="width:100%">
-                </div>
-            </div>
-            
-            <!-- Left and right controls/icons -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-            </div>
-
-            
-        </div>       
-
-    </section>
-
-
-    <section id="ourservices" class="min-vh-100 mt-5 mb-5 d-flex flex-column justify-content-center align-items-center text-center" style="scroll-margin-top: 65px;">
-
-  <div class="mb-4">
-    <h2 class="fw-bold">Our Services</h2>
+    </div>
   </div>
+</section>
 
-<div class="container" style="max-width: 1100px;">
-<div class="row g-4 justify-content-center">
-    
-<div class="col-10 col-sm-6 col-lg-4">
-      <div class="card h-100">
-        <img src="/static/img/find doctor.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Find the right doctor</h5>
-          <p class="card-text">Search by specialty or city. See details, contact info, and locations in seconds.</p>
+<section id="about" class="section-shell anchor-section">
+  <div class="container">
+    <div class="row g-4 align-items-center mb-4">
+      <div class="col-lg-6">
+        <span class="section-badge mb-3">About SmartHealth</span>
+        <h2 class="section-title mb-3">A straightforward digital healthcare platform.</h2>
+        <p class="section-copy mb-0">The goal is simple: make it easier for patients to find the right doctor, review useful information, and book an appointment without unnecessary friction. The interface focuses on clarity, speed, and confidence.</p>
+      </div>
+      <div class="col-lg-6">
+        <div id="demo" class="carousel slide shadow-sm rounded-5 overflow-hidden" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="{{ url_for('static', filename='img/photo 1.png') }}" alt="People talking" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+              <img src="{{ url_for('static', filename='img/photo 2.png') }}" alt="Tablet" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+              <img src="{{ url_for('static', filename='img/photo group.jpg') }}" alt="Doctor team" class="d-block w-100">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
         </div>
       </div>
     </div>
-
-<div class="col-10 col-sm-6 col-lg-4">
-      <div class="card h-100">
-        <img src="/static/img/manage visit.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Manage your visits</h5>
-          <p class="card-text">Add appointments and keep track of your medical visits easily.</p>
-        </div>
-      </div>
-    </div>
-
-<div class="col-10 col-sm-6 col-lg-4">
-      <div class="card h-100">
-        <img src="/static/img/doctor hours.png" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Check doctor hours</h5>
-          <p class="card-text">See when doctors are available before booking. Plan with ease.</p>
-        </div>
-      </div>
-    </div>
-
-<div class="col-10 col-sm-6 col-lg-4">
-      <div class="card h-100">
-        <img src="/static/img/doctor hours 2.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Available 24/7</h5>
-          <p class="card-text">Access SmartHealth anytime — day or night. Our platform is always online.</p>
-        </div>
-      </div>
-    </div>
-
-<div class="col-10 col-sm-6 col-lg-4">
-      <div class="card h-100">
-        <img src="/static/img/doctor secure.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Secure and Reliable</h5>
-          <p class="card-text">Your data and appointments are protected with top-grade security.</p>
-        </div>
-      </div>
-    </div>
-
-<div class="col-10 col-sm-6 col-lg-4">
-      <div class="card h-100">
-        <img src="/static/img/doctor easy acces.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Easy Access</h5>
-          <p class="card-text">All your appointments and medical details at your fingertips.</p>
-        </div>
-      </div>
-    </div>
-
   </div>
-</div>
+</section>
 
+<section id="ourservices" class="section-shell anchor-section pt-0">
+  <div class="container">
+    <div class="text-center mb-4">
+      <span class="section-badge mb-3">Our services</span>
+      <h2 class="section-title mb-2">Designed around the full booking flow.</h2>
+      <p class="section-copy mx-auto mb-0" style="max-width: 720px;">SmartHealth groups the core actions users need most: discovery, booking, follow-up, and secure access to appointments.</p>
+    </div>
 
-    </section>
-    {% endblock %}
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card h-100">
+          <img src="{{ url_for('static', filename='img/find doctor.jpg') }}" alt="Find the right doctor" class="card-img-top">
+          <div class="card-body">
+            <div class="feature-icon mb-3">01</div>
+            <h5 class="fw-bold">Find the right doctor</h5>
+            <p class="mb-0 text-muted">Search by specialty, name, or city and quickly review the doctor profile that fits your needs.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card h-100">
+          <img src="{{ url_for('static', filename='img/manage visit.jpg') }}" alt="Manage visits" class="card-img-top">
+          <div class="card-body">
+            <div class="feature-icon mb-3">02</div>
+            <h5 class="fw-bold">Manage your visits</h5>
+            <p class="mb-0 text-muted">Create appointments, keep them organized, and review your consultation history in one place.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card h-100">
+          <img src="{{ url_for('static', filename='img/doctor hours.png') }}" alt="Check doctor hours" class="card-img-top">
+          <div class="card-body">
+            <div class="feature-icon mb-3">03</div>
+            <h5 class="fw-bold">Check doctor hours</h5>
+            <p class="mb-0 text-muted">See availability before booking so patients can plan appointments with less friction.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card h-100">
+          <img src="{{ url_for('static', filename='img/doctor hours 2.jpg') }}" alt="Always available" class="card-img-top">
+          <div class="card-body">
+            <div class="feature-icon mb-3">04</div>
+            <h5 class="fw-bold">Available 24/7</h5>
+            <p class="mb-0 text-muted">Patients can browse and book at any time, day or night, from any device.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card h-100">
+          <img src="{{ url_for('static', filename='img/doctor secure.jpg') }}" alt="Secure and reliable" class="card-img-top">
+          <div class="card-body">
+            <div class="feature-icon mb-3">05</div>
+            <h5 class="fw-bold">Secure and reliable</h5>
+            <p class="mb-0 text-muted">The platform keeps the experience focused and dependable for patients and administrators.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="feature-card h-100">
+          <img src="{{ url_for('static', filename='img/doctor easy acces.jpg') }}" alt="Easy access" class="card-img-top">
+          <div class="card-body">
+            <div class="feature-icon mb-3">06</div>
+            <h5 class="fw-bold">Easy access</h5>
+            <p class="mb-0 text-muted">All appointments and essential details are easy to reach in a clean, responsive layout.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
     

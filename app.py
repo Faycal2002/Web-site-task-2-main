@@ -57,6 +57,66 @@ class Appointment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
+def seed_demo_data():
+    demo_users = [
+        {
+            "firstname": "Smart",
+            "lastname": "Admin",
+            "address": "Demo Address",
+            "number": 700000001,
+            "email": "admin@smarthealth.local",
+            "password": "SmartHealthAdmin123!",
+            "role": "admin",
+        },
+        {
+            "firstname": "Demo",
+            "lastname": "Patient",
+            "address": "Demo Address",
+            "number": 700000002,
+            "email": "patient@smarthealth.local",
+            "password": "SmartHealthPatient123!",
+            "role": "patient",
+        },
+    ]
+
+    for user_data in demo_users:
+        if not User.query.filter_by(email=user_data["email"]).first():
+            db.session.add(
+                User(
+                    firstname=user_data["firstname"],
+                    lastname=user_data["lastname"],
+                    address=user_data["address"],
+                    number=user_data["number"],
+                    email=user_data["email"],
+                    password=generate_password_hash(user_data["password"]),
+                    role=user_data["role"],
+                )
+            )
+
+    if not Doctor.query.first():
+        demo_doctors = [
+            {
+                "name": "Dr. Olivia Carter",
+                "specialty": "Cardiology",
+                "location": "Sheffield",
+                "image": "img/doctor1.jpg",
+                "description": "Heart health consultations and preventive care.",
+            },
+            {
+                "name": "Dr. Amir Patel",
+                "specialty": "Dermatology",
+                "location": "Manchester",
+                "image": "img/doctor2.jpg",
+                "description": "Skin care, diagnosis, and treatment plans.",
+            },
+        ]
+
+        for doctor_data in demo_doctors:
+            db.session.add(Doctor(**doctor_data))
+
+    db.session.commit()
+
+
 # -------------------------
 # CONTEXT PROCESSORS (NAVBAR)
 # -------------------------
@@ -477,4 +537,5 @@ def appointments():
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
+        seed_demo_data()
     app.run(debug=True)

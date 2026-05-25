@@ -2,27 +2,29 @@
 {% block title %}Appointment Confirmed - SmartHealth{% endblock %}
 {% block content %}
 
-<section class="container text-center mt-5 mb-5">
-<div class="card shadow-sm border border-dark rounded-4 p-5 mx-auto" style="max-width: 400px;">
+<section class="section-shell">
+  <div class="container text-center">
+    <div class="confirmation-card auth-card p-4 p-lg-5 mx-auto" style="max-width: 560px;">
+       <img src="{{ url_for('static', filename='img/confirmation.png') }}"
+         alt="Confirmed"
+           class="mb-4 d-block mx-auto confirmation-illustration"
+           style="width: 130px; height: 130px; object-fit: contain;">
 
-    <!-- Image de confirmation centrée -->
-    <img src="{{ url_for('static', filename='img/confirmation.png') }}" 
-         alt="Confirmed" 
-         class="mb-4 d-block mx-auto"
-         style="width: 120px; height: 120px; object-fit: contain;">
+      <span class="section-badge mb-3">Appointment confirmed</span>
+      <h1 class="h2 fw-bold mb-3">Your booking is confirmed.</h1>
 
-    <h3 class="fw-bold text-success mb-3">Appointment Confirmed</h3>
+      <p class="section-copy mb-4">
+        Your appointment with <strong>{{ doctor.name }}</strong> ({{ doctor.specialty }}) has been successfully booked.
+      </p>
 
-    <p class="text-muted mb-4">
-      Your appointment with <strong>{{ doctor.name }}</strong> ({{ doctor.specialty }})
-      has been successfully booked.
-    </p>
+      <div class="alert alert-success rounded-4 mb-4">
+        We look forward to seeing you soon in {{ doctor.location }}.
+      </div>
 
-    <p>We look forward to seeing you soon in {{ doctor.location }}.</p>
-
-    <a href="{{ url_for('home') }}" class="btn btn-dark rounded-pill mt-3 px-4">
-      Return to Home
-    </a>
+      <a href="{{ url_for('home') }}" class="btn btn-dark rounded-pill px-4 py-2">
+        Return to home
+      </a>
+    </div>
   </div>
 </section>
 
