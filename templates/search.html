@@ -4,64 +4,60 @@
 
 <section class="section-shell anchor-section">
   <div class="container">
-  <div class="text-center mb-4">
-    <span class="section-badge mb-3">Doctor directory</span>
-    <h2 class="section-title mb-3">Find the right doctor.</h2>
-    <p class="section-copy mx-auto mb-0" style="max-width: 720px;">Search by name, specialty, or city, then compare doctors and book your appointment directly from the result cards.</p>
-  </div>
-
-  <form method="GET" action="{{ url_for('search') }}" class="mb-5">
-    <div class="input-group input-group-lg search-bar">
-      <span class="input-group-text bg-transparent text-muted border-0 ps-4">Search</span>
-      <input 
-        type="text" 
-        name="query" 
-        class="form-control py-3"
-        placeholder="Enter doctor name, specialty, or city..."
-        value="{{ request.args.get('query', '') }}"
-      >
-      <button type="submit" class="btn btn-dark rounded-pill px-4 me-1">Search</button>
+    <div class="text-center mb-4">
+      <span class="section-badge mb-3">Doctor directory</span>
+      <h2 class="section-title mb-3">Find the right doctor.</h2>
+      <p class="section-copy mx-auto mb-0" style="max-width: 720px;">Search by name, specialty, or city, then compare
+        doctors and book your appointment directly from the result cards.</p>
     </div>
-  </form>
 
-  <div class="row g-4">
-    {% for doctor in doctors %}
-    <div class="col-md-6 col-lg-4">
-      <div class="doctor-card h-100">
-        <img src="{{ url_for('static', filename=doctor.image) }}" class="card-img-top" alt="{{ doctor.name }}">
-        <div class="card-body">
-          <h5 class="fw-bold mb-1">{{ doctor.name }}</h5>
-          <p class="text-muted small mb-2">{{ doctor.specialty }} — {{ doctor.location }}</p>
-          <p class="small text-muted mb-0">{{ doctor.description }}</p>
+    <form method="GET" action="{{ url_for('search') }}" class="mb-5">
+      <div class="input-group input-group-lg search-bar">
+        <span class="input-group-text bg-transparent text-muted border-0 ps-4">Search</span>
+        <input type="text" name="query" class="form-control py-3" placeholder="Enter doctor name, specialty, or city..."
+          value="{{ request.args.get('query', '') }}">
+        <button type="submit" class="btn btn-dark rounded-pill px-4 me-1">Search</button>
+      </div>
+    </form>
+
+    <div class="row g-4">
+      {% for doctor in doctors %}
+      <div class="col-md-6 col-lg-4">
+        <div class="doctor-card h-100">
+          <img src="{{ url_for('static', filename=doctor.image) }}" class="card-img-top" alt="{{ doctor.name }}">
+          <div class="card-body">
+            <h5 class="fw-bold mb-1">{{ doctor.name }}</h5>
+            <p class="text-muted small mb-2">{{ doctor.specialty }} — {{ doctor.location }}</p>
+            <p class="small text-muted mb-0">{{ doctor.description }}</p>
+          </div>
+
+
+          <div class="card-footer bg-transparent border-0 d-flex gap-2 justify-content-center pb-4">
+            <a href="{{ url_for('book_appointment', doctor_id=doctor.id) }}"
+              class="btn btn-dark btn-sm rounded-pill px-3">Book</a>
+            <a href="{{ url_for('appointments') }}" class="btn btn-outline-dark btn-sm rounded-pill px-3">Track
+              appointments</a>
+          </div>
+
         </div>
+      </div>
+      {% endfor %}
+    </div>
 
-
-        <div class="card-footer bg-transparent border-0 d-flex gap-2 justify-content-center pb-4">
-          <a href="{{ url_for('book_appointment', doctor_id=doctor.id) }}" class="btn btn-dark btn-sm rounded-pill px-3">Book</a>
-          <a href="{{ url_for('appointments') }}" class="btn btn-outline-dark btn-sm rounded-pill px-3">Track appointments</a>
-        </div>
-
+    <div class="mt-5">
+      <h5 class="fw-semibold mb-3">Map of results</h5>
+      <div class="ratio ratio-16x9 shadow-sm rounded-4 overflow-hidden map-frame">
+        {% if query %}
+        <iframe src="https://www.google.com/maps?q={{ query | urlencode }}&output=embed"
+          style="border:0; border-radius:10px;" allowfullscreen loading="lazy">
+        </iframe>
+        {% else %}
+        <iframe src="https://www.google.com/maps?q=sheffield+hospital+nhs&output=embed"
+          style="border:0; border-radius:10px;" allowfullscreen loading="lazy">
+        </iframe>
+        {% endif %}
       </div>
     </div>
-    {% endfor %}
-  </div>
-
-  <div class="mt-5">
-    <h5 class="fw-semibold mb-3">Map of results</h5>
-    <div class="ratio ratio-16x9 shadow-sm rounded-4 overflow-hidden map-frame">
-      {% if query %}
-        <iframe 
-          src="https://www.google.com/maps?q={{ query | urlencode }}&output=embed"
-          style="border:0; border-radius:10px;" allowfullscreen loading="lazy">
-        </iframe>
-      {% else %}
-        <iframe 
-          src="https://www.google.com/maps?q=sheffield+hospital+nhs&output=embed"
-          style="border:0; border-radius:10px;" allowfullscreen loading="lazy">
-        </iframe>
-      {% endif %}
-    </div>
-  </div>
   </div>
 </section>
 

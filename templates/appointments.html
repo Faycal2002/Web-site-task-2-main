@@ -4,21 +4,21 @@
 
 <section class="dashboard-shell anchor-section">
   <div class="container">
-  <div class="d-flex align-items-end justify-content-between flex-wrap gap-3 mb-4">
-    <div>
-      <span class="section-badge mb-2">Patient dashboard</span>
-      <h2 class="section-title mb-2">My appointments</h2>
-      <p class="section-copy mb-0">Review your upcoming and past bookings in a single place.</p>
+    <div class="d-flex align-items-end justify-content-between flex-wrap gap-3 mb-4">
+      <div>
+        <span class="section-badge mb-2">Patient dashboard</span>
+        <h2 class="section-title mb-2">My appointments</h2>
+        <p class="section-copy mb-0">Review your upcoming and past bookings in a single place.</p>
+      </div>
     </div>
-  </div>
 
-  {% if appointments|length == 0 %}
-  <div class="empty-state p-4 p-lg-5 text-center">
-    <h3 class="h4 fw-bold mb-2">No appointments yet</h3>
-    <p class="mb-4 text-muted">Your upcoming visits will appear here after booking one with a doctor.</p>
-    <a href="{{ url_for('search') }}" class="btn btn-dark rounded-pill px-4">Find a doctor</a>
-  </div>
-  {% else %}
+    {% if appointments|length == 0 %}
+    <div class="empty-state p-4 p-lg-5 text-center">
+      <h3 class="h4 fw-bold mb-2">No appointments yet</h3>
+      <p class="mb-4 text-muted">Your upcoming visits will appear here after booking one with a doctor.</p>
+      <a href="{{ url_for('search') }}" class="btn btn-dark rounded-pill px-4">Find a doctor</a>
+    </div>
+    {% else %}
     <div class="table-responsive table-clean">
       <table class="table table-striped align-middle">
         <thead class="table-dark">
@@ -45,7 +45,7 @@
         </tbody>
       </table>
     </div>
-  {% endif %}
+    {% endif %}
   </div>
 </section>
 
